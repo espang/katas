@@ -3,19 +3,28 @@ package chop
 import "testing"
 
 func TestChop(t *testing.T) {
-	testCases := []struct{
-		want int
+	testCases := []struct {
+		name  string
+		want  int
 		value int
 		array []int
-	} {
-		{-1, 3, nil},
-		{-1, 3, []int{}},
-		{-1, 3, []int{1}},
-		{0, 1, []int{1}},
+	}{
+		{"1_1", -1, 3, nil},
+		{"1_2", -1, 3, []int{}},
+		{"1_3", -1, 3, []int{1}},
+		{"1_4", 0, 1, []int{1}},
+
+		{"2_1", 0, 1, []int{1, 3, 5}},
+		{"2_2", 1, 3, []int{1, 3, 5}},
+		{"2_3", 2, 5, []int{1, 3, 5}},
+		{"2_4", -1, 0, []int{1, 3, 5}},
+		{"2_5", -1, 2, []int{1, 3, 5}},
+		{"2_6", -1, 4, []int{1, 3, 5}},
+		{"2_7", -1, 6, []int{1, 3, 5}},
 	}
 
 	for _, tc := range testCases {
-		t.Run("",func (t *testing.T){
+		t.Run(tc.name, func(t *testing.T) {
 			got := chop(tc.value, tc.array)
 			if got != tc.want {
 				t.Errorf("Got %d; want %d.", got, tc.want)
@@ -24,10 +33,6 @@ func TestChop(t *testing.T) {
 	}
 }
 
-// assert_equal(-1, chop(3, []))
-//   assert_equal(-1, chop(3, [1]))
-//   assert_equal(0,  chop(1, [1]))
-//   #
 //   assert_equal(0,  chop(1, [1, 3, 5]))
 //   assert_equal(1,  chop(3, [1, 3, 5]))
 //   assert_equal(2,  chop(5, [1, 3, 5]))
