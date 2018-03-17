@@ -21,6 +21,16 @@ func TestChop(t *testing.T) {
 		{"2_5", -1, 2, []int{1, 3, 5}},
 		{"2_6", -1, 4, []int{1, 3, 5}},
 		{"2_7", -1, 6, []int{1, 3, 5}},
+
+		{"3_1", 0, 1, []int{1, 3, 5, 7}},
+		{"3_2", 1, 3, []int{1, 3, 5, 7}},
+		{"3_3", 2, 5, []int{1, 3, 5, 7}},
+		{"3_4", 3, 7, []int{1, 3, 5, 7}},
+		{"3_5", -1, 0, []int{1, 3, 5, 7}},
+		{"3_6", -1, 2, []int{1, 3, 5, 7}},
+		{"3_7", -1, 4, []int{1, 3, 5, 7}},
+		{"3_8", -1, 6, []int{1, 3, 5, 7}},
+		{"3_9", -1, 8, []int{1, 3, 5, 7}},
 	}
 
 	for _, tc := range testCases {
@@ -32,22 +42,3 @@ func TestChop(t *testing.T) {
 		})
 	}
 }
-
-//   assert_equal(0,  chop(1, [1, 3, 5]))
-//   assert_equal(1,  chop(3, [1, 3, 5]))
-//   assert_equal(2,  chop(5, [1, 3, 5]))
-//   assert_equal(-1, chop(0, [1, 3, 5]))
-//   assert_equal(-1, chop(2, [1, 3, 5]))
-//   assert_equal(-1, chop(4, [1, 3, 5]))
-//   assert_equal(-1, chop(6, [1, 3, 5]))
-//   #
-//   assert_equal(0,  chop(1, [1, 3, 5, 7]))
-//   assert_equal(1,  chop(3, [1, 3, 5, 7]))
-//   assert_equal(2,  chop(5, [1, 3, 5, 7]))
-//   assert_equal(3,  chop(7, [1, 3, 5, 7]))
-//   assert_equal(-1, chop(0, [1, 3, 5, 7]))
-//   assert_equal(-1, chop(2, [1, 3, 5, 7]))
-//   assert_equal(-1, chop(4, [1, 3, 5, 7]))
-//   assert_equal(-1, chop(6, [1, 3, 5, 7]))
-//   assert_equal(-1, chop(8, [1, 3, 5, 7]))
-// end
