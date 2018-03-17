@@ -3,6 +3,20 @@ package chop
 import "testing"
 
 func TestChop(t *testing.T) {
+	testFunctions := []struct {
+		name string
+		fn   func(int, []int) int
+	}{
+		{
+			"recursive",
+			chopRec,
+		},
+		{
+			"iterative",
+			chopIter,
+		},
+	}
+
 	testCases := []struct {
 		name  string
 		want  int
@@ -33,12 +47,14 @@ func TestChop(t *testing.T) {
 		{"3_9", -1, 8, []int{1, 3, 5, 7}},
 	}
 
-	for _, tc := range testCases {
-		t.Run(tc.name, func(t *testing.T) {
-			got := chop(tc.value, tc.array)
-			if got != tc.want {
-				t.Errorf("Got %d; want %d.", got, tc.want)
-			}
-		})
+	for _, tFn := range testFunctions {
+		for _, tc := range testCases {
+			t.Run(tFn.name+"-"+tc.name, func(t *testing.T) {
+				got := tFn.fn(tc.value, tc.array)
+				if got != tc.want {
+					t.Errorf("Got %d; want %d.", got, tc.want)
+				}
+			})
+		}
 	}
 }
